@@ -14,5 +14,6 @@ Thumbs.db
 *~
 
 # User uploaded files (optional - uncomment if needed)
+# Note: Sample question files should be committed
 # *.xlsx
 # *.xls
