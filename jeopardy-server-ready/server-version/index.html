@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Customizable Jeopardy game with Excel import, timer, and team scoring">
+    <meta name="keywords" content="jeopardy, trivia, game, quiz, education">
+    <meta name="author" content="Jeopardy Game">
+    <title>Jeopardy Game - Interactive Trivia</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Setup Screen -->
+        <div class="setup-screen" id="setupScreen">
+            <div class="logo">JEOPARDY!</div>
+            
+            <div class="setup-card">
+                <div class="setup-group">
+                    <label for="gameTitle">Game Title:</label>
+                    <input type="text" id="gameTitle" placeholder="JEOPARDY!" value="JEOPARDY!">
+                    <p class="info-text">Customize the game title</p>
+                </div>
+
+                <div class="setup-group">
+                    <label for="numTeams">Number of Teams:</label>
+                    <input type="number" id="numTeams" min="1" max="8" value="3" onchange="updateTeamNames()">
+                    <p class="info-text">Choose between 1-8 teams</p>
+                </div>
+
+                <div class="setup-group" id="teamNamesContainer">
+                    <label>Team Names:</label>
+                    <div id="teamNamesInputs"></div>
+                </div>
+
+                <div class="setup-group">
+                    <label for="numRows">Number of Rows (Questions per Category):</label>
+                    <input type="number" id="numRows" min="1" max="15" value="10">
+                </div>
+
+                <div class="setup-group">
+                    <label for="numCols">Number of Columns (Categories):</label>
+                    <input type="number" id="numCols" min="1" max="12" value="10">
+                </div>
+
+                <div class="setup-group">
+                    <label for="timerEnabled">Enable Timer:</label>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <input type="checkbox" id="timerEnabled" style="width: auto; margin: 0;">
+                        <input type="number" id="timerSeconds" min="5" max="300" value="30" placeholder="seconds" style="width: 100px;">
+                        <span style="color: #a0a0ff;">seconds per question</span>
+                    </div>
+                    <p class="info-text">Timer starts when question appears</p>
+                </div>
+
+                <div class="setup-group">
+                    <label for="excelFile">Import Questions from Excel (Optional):</label>
+                    <input type="file" id="excelFile" accept=".xlsx,.xls">
+                    <p class="info-text">Leave blank to use sample questions</p>
+                </div>
+
+                <div class="template-info">
+                    <h3>Excel Format:</h3>
+                    <ul>
+                        <li><strong>Row 1:</strong> Category names</li>
+                        <li><strong>Column A:</strong> Point values (200, 400, 600...)</li>
+                        <li><strong>Even rows:</strong> Questions</li>
+                        <li><strong>Odd rows:</strong> Answers (below each question)</li>
+                    </ul>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-primary" onclick="startGame()">Start Game</button>
+                    <button class="btn-secondary" onclick="downloadTemplate()">Download Template</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div class="game-screen" id="gameScreen">
+            <div class="game-header">
+                <div class="game-title">JEOPARDY!</div>
+                <div class="scores-container" id="scoresContainer"></div>
+            </div>
+
+            <div class="board" id="board"></div>
+
+            <div class="controls">
+                <button class="btn-secondary" onclick="resetGame()">New Game</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question Modal -->
+    <div class="modal" id="questionModal">
+        <div class="modal-content">
+            <div class="timer-display" id="timerDisplay" style="display: none;"></div>
+            <div class="question-value" id="modalValue"></div>
+            <div class="question-text" id="modalQuestion"></div>
+            <div class="answer-text" id="modalAnswer" style="display: none;"></div>
+            
+            <div class="team-buttons" id="teamButtons"></div>
+            
+            <div class="action-buttons">
+                <button class="btn-show-answer" id="showAnswerBtn" onclick="showAnswer()">Show Answer</button>
+                <button class="btn-close" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
