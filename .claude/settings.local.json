@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /s /b *.xlsx *.xls)",
+      "Bash(python -c:*)",
+      "Bash(powershell -Command \"\\(Get-Content game.js\\) | ForEach-Object { $_-replace ''^        '', '''' } | Set-Content game.js.tmp && Move-Item -Force game.js.tmp game.js\")",
+      "Bash(powershell -Command \"\\(Get-Content game.js\\) | ForEach-Object { $_ -replace ''^        '', '''' } | Set-Content game.js.tmp\")",
+      "Bash(powershell -Command \"Move-Item -Force game.js.tmp game.js\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File fix-indent.ps1)"
+    ]
+  }
+}
