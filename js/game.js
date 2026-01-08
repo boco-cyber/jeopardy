@@ -285,7 +285,7 @@ function renderScores() {
         teamDiv.className = 'team-score';
         teamDiv.innerHTML = `
             <div class="team-name">${team.name}</div>
-            <div class="team-points">$${team.score}</div>
+            <div class="team-points">${team.score}</div>
             <div class="manual-points">
                 <button onclick="adjustPoints(${index}, -100)">-100</button>
                 <button onclick="adjustPoints(${index}, 100)">+100</button>
@@ -347,10 +347,10 @@ function renderBoard() {
             }
 
             if (gameData.questions[r] && gameData.questions[r][c]) {
-                cell.textContent = `$${gameData.questions[r][c].value}`;
+                cell.textContent = `${gameData.questions[r][c].value}`;
                 cell.onclick = () => openQuestion(r, c);
             } else {
-                cell.textContent = `$${(r + 1) * 200}`;
+                cell.textContent = `${(r + 1) * 200}`;
                 console.warn(`Missing question data at row ${r}, col ${c}`);
             }
             row.appendChild(cell);
@@ -367,7 +367,7 @@ function openQuestion(row, col) {
     currentQuestion = { row, col, id: questionId };
     const q = gameData.questions[row][col];
 
-    document.getElementById('modalValue').innerHTML = `$${q.value}`;
+    document.getElementById('modalValue').innerHTML = `${q.value}`;
     document.getElementById('modalQuestion').textContent = q.question;
     document.getElementById('modalAnswer').textContent = q.answer;
     document.getElementById('modalAnswer').style.display = 'none';
