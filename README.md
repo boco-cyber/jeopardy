@@ -3,6 +3,8 @@
 A fully-featured, customizable Jeopardy-style game built with HTML, CSS, and JavaScript. Perfect for church groups, classrooms, trivia nights, or any educational setting!
 
 ![Jeopardy Game](screenshot.png)
+please enjoy the game on this link , just upload your questions !
+https://boco-cyber.github.io/jeopardy/
 
 ## Features
 
